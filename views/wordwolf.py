@@ -87,9 +87,15 @@ elif ss.ww_phase == "discuss":
 # --- 投票 ---
 elif ss.ww_phase == "vote":
     st.markdown("<div class='mega-sub'>🗳️ ウルフだと思う人は?</div>", unsafe_allow_html=True)
-    voted = st.radio("せーので指差し投票!一番票を集めた人を選んでください", ss.ww_players)
+    # 同名プレイヤーがいても正しく判定できるよう、名前ではなくインデックスで持つ
+    players = ss.ww_players
+    voted_idx = st.radio(
+        "せーので指差し投票!一番票を集めた人を選んでください",
+        range(len(players)),
+        format_func=lambda i: players[i],
+    )
     if st.button("🎬 結果発表!", type="primary", use_container_width=True):
-        ss.ww_voted = voted
+        ss.ww_voted_idx = voted_idx
         ss.ww_phase = "result"
         st.rerun()
     st.button("🔄 最初からやり直す", on_click=reset)
@@ -97,7 +103,7 @@ elif ss.ww_phase == "vote":
 # --- 結果 ---
 elif ss.ww_phase == "result":
     wolves = [ss.ww_players[i] for i in sorted(ss.ww_wolves)]
-    voted_is_wolf = ss.ww_voted in wolves
+    voted_is_wolf = ss.ww_voted_idx in ss.ww_wolves
     ui.play_mp3("tada.mp3")
     ui.confetti(80)
 

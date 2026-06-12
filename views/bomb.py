@@ -27,9 +27,10 @@ if "bomb_duration" in st.session_state:
         )
 
     # 起爆ボタンは iframe 内に置く(クリック起点なので音の自動再生制限を回避できる)
+    # data-round を埋め込み、時間とお題が前回と同じでもHTMLを変えて iframe を確実に再マウントする
     components.html(
         f"""
-<div id="stage" style="font-family: sans-serif; text-align: center; color: #fff; padding-top: 8px;">
+<div id="stage" data-round="{st.session_state.bomb_round}" style="font-family: sans-serif; text-align: center; color: #fff; padding-top: 8px;">
   <button id="ignite" style="font-size: 28px; padding: 14px 50px; border-radius: 12px;
        border: 2px solid #ff5555; background: #16161f; color: #ff5555;
        cursor: pointer; font-weight: 900;">🔥 点火!</button>
