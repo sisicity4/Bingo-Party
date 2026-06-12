@@ -1,5 +1,4 @@
 import random
-import time
 
 import streamlit as st
 
@@ -36,17 +35,17 @@ number_area = st.empty()
 sound_area = st.empty()
 
 if draw_clicked and st.session_state.bingo_numbers:
-    # ドラムロールを鳴らして2秒ためる(プレースホルダを消すと音も止まる)
+    # ドラムロール+スロット演出でためる(プレースホルダを消すと音も止まる)
     ui.play_mp3("drum-roll.mp3", sound_area)
-    with number_area:
-        st.markdown("<div class='placeholder-dash'>🥁 抽選中...</div>", unsafe_allow_html=True)
-    time.sleep(2)
+    candidates = [f"<span style='font-size:0.45em;'>{letter_of(n)}</span> {n}" for n in range(1, 76)]
+    ui.slot_roll(number_area, candidates)
     sound_area.empty()
 
     num = st.session_state.bingo_numbers.pop()
     st.session_state.bingo_drawn.append(num)
     st.session_state.bingo_current = num
     ui.play_mp3("tada.mp3", sound_area)
+    ui.confetti(40)
 
 cur = st.session_state.bingo_current
 with number_area:

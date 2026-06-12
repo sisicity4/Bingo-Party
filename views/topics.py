@@ -24,6 +24,7 @@ if col1.button("🎰 ガチャを回す!", type="primary", use_container_width=T
     topic = random.choice(pool)
     history.append(topic)
     ui.play_mp3("tada.mp3")
+    ui.confetti(30)
 
 if col2.button("🗑️ 履歴クリア", use_container_width=True):
     history.clear()

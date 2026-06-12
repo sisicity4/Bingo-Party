@@ -22,6 +22,7 @@ if col1.button("⭕ ピンポン!", type="primary", use_container_width=True):
     flash_area.markdown(
         "<div class='flash-mark' style='color:#ff5555;'>⭕</div>", unsafe_allow_html=True
     )
+    ui.confetti(25)
 if col2.button("❌ ブッブー", use_container_width=True):
     ui.play_wav_b64(sounds.boo_b64(), sound_area)
     flash_area.markdown(

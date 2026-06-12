@@ -99,6 +99,7 @@ elif ss.ww_phase == "result":
     wolves = [ss.ww_players[i] for i in sorted(ss.ww_wolves)]
     voted_is_wolf = ss.ww_voted in wolves
     ui.play_mp3("tada.mp3")
+    ui.confetti(80)
 
     if voted_is_wolf:
         st.markdown("<div class='mega'>市民の勝ち!</div>", unsafe_allow_html=True)

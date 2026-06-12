@@ -1,5 +1,4 @@
 import random
-import time
 
 import streamlit as st
 
@@ -34,9 +33,7 @@ result_area = st.empty()
 
 if st.button("🎲 ルーレットスタート!", type="primary", use_container_width=True, disabled=len(names) < 2):
     ui.play_mp3("drum-roll.mp3", sound_area)
-    with result_area:
-        st.markdown("<div class='placeholder-dash'>🥁 ドルルルル...</div>", unsafe_allow_html=True)
-    time.sleep(2)
+    ui.slot_roll(result_area, names)
     sound_area.empty()
 
     if mode == "🏆 当たり抽選":
@@ -60,6 +57,7 @@ if st.button("🎲 ルーレットスタート!", type="primary", use_container_
         st.session_state.roulette_result = "".join(rows)
 
     ui.play_mp3("tada.mp3", sound_area)
+    ui.confetti(70)
 
 if len(names) < 2:
     st.info("2人以上の名前を入れるとスタートできます。")
