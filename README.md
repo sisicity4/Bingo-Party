@@ -1,7 +1,38 @@
-# Bingo-Party
-## 概要 (Overview)
-パーティ向けのビンゴ抽選（1〜75）アプリです。
-PythonとStreamlitで動きます。
+# Party Games(旧 Bingo-Party)
 
-A bingo app for parties and events.
-Powered by Python and Streamlit.
+## 概要 (Overview)
+
+大画面(テレビ・プロジェクター)に映して、3〜10人くらい(もっと多くてもOK)でワイワイ遊べる「全部入り」パーティーゲーム集です。
+Python と Streamlit で動きます。
+
+An all-in-one party game collection for the big screen, built with Python and Streamlit.
+
+## 遊べるゲーム (Games)
+
+| ゲーム | 人数 | 内容 |
+| --- | --- | --- |
+| 🎱 ビンゴ | 何人でも | 1〜75の抽選。ドラムロール&75マスの履歴ボード付き |
+| 🎯 ルーレット抽選 | 何人でも | 当たり抽選・順番決め・チーム分け |
+| 🐺 ワードウルフ | 3〜10人 | 少数派のお題を当てる会話ゲーム。配役〜投票〜結果発表まで進行 |
+| 🎁 お題ガチャ | 3人〜 | 山手線ゲーム・ジェスチャー・トークテーマのお題をランダム表示+タイマー |
+| 💣 爆弾ゲーム | 3人〜 | ランダムな隠し時間で爆発する時限爆弾。爆発時に持ってた人の負け |
+| ⭕ クイズ司会ボード | 何人でも | ピンポン/ブー効果音+チーム得点ボード |
+
+## 動かし方 (How to run)
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+ブラウザが開いたら、画面を大画面に映してパーティースタート!
+効果音が鳴るので音量に注意してください。
+
+## 構成 (Structure)
+
+```
+app.py            # エントリポイント(ページナビゲーション)
+views/            # 各ゲームの画面
+lib/              # 共通部品(効果音合成・UI・お題データ)
+assets/           # 音声ファイル
+```
