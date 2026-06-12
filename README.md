@@ -18,6 +18,8 @@ An all-in-one party game collection for the big screen, built with Python and St
 | 💣 爆弾ゲーム | 3人〜 | ランダムな隠し時間で爆発する時限爆弾。爆発時に持ってた人の負け |
 | ⭕ クイズ司会ボード | 何人でも | ピンポン/ブー効果音+チーム得点ボード |
 
+スロットマシン風の抽選演出・紙吹雪・アニメーション背景つき(すべてCSSと標準ライブラリのみ、追加依存なし)。
+
 ## 動かし方 (How to run)
 
 ```bash
