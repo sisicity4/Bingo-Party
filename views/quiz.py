@@ -45,7 +45,7 @@ for i, (col, team) in enumerate(zip(cols, ss.quiz_teams)):
             "チーム名", team["name"], key=f"quiz_name_{i}", label_visibility="collapsed"
         )
         st.markdown(f"<div class='team-score'>{team['score']}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='team-name'>{team['name']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='team-name'>{ui.esc(team['name'])}</div>", unsafe_allow_html=True)
         b1, b2, b3 = st.columns(3)
         if b1.button("+1", key=f"quiz_p1_{i}", use_container_width=True):
             team["score"] += 1

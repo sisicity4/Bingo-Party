@@ -1,6 +1,7 @@
 """全ゲーム共通のUI部品(CSS・効果音再生・タイマー・演出)。"""
 
 import base64
+import html
 import pathlib
 import random
 import time
@@ -9,6 +10,11 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 ASSETS = pathlib.Path(__file__).resolve().parent.parent / "assets"
+
+
+def esc(text):
+    """ユーザー入力をHTML(unsafe_allow_html)に埋め込む前にエスケープする。"""
+    return html.escape(str(text))
 
 _CSS = """
 <style>
@@ -247,7 +253,11 @@ def confetti(count=60):
 
 
 def slot_roll(placeholder, items, css_class="slot"):
-    """スロットマシン風に候補を高速表示して徐々に減速する(約1.9秒)。"""
+    """スロットマシン風に候補を高速表示して徐々に減速する(約1.9秒)。
+
+    items はそのままHTMLとして描画されるので、ユーザー入力を渡す場合は
+    呼び出し側で ui.esc() 済みの文字列を渡すこと。
+    """
     delays = [0.06, 0.06, 0.07, 0.08, 0.09, 0.10, 0.11, 0.12, 0.14, 0.16, 0.18, 0.20, 0.23, 0.26]
     for d in delays:
         pick = random.choice(items)

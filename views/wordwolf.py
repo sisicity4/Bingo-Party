@@ -55,7 +55,7 @@ elif ss.ww_phase == "reveal":
     i = ss.ww_reveal_idx
     name = ss.ww_players[i]
     st.progress((i + (1 if ss.ww_showing else 0)) / len(ss.ww_players))
-    st.markdown(f"<div class='mega-sub'>{name} さんの番</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='mega-sub'>{ui.esc(name)} さんの番</div>", unsafe_allow_html=True)
     st.caption("⚠️ 他の人は画面を見ないでください(端末を回すか、順番に前に来てね)")
 
     if not ss.ww_showing:
@@ -113,7 +113,7 @@ elif ss.ww_phase == "result":
         st.markdown("<div class='mega'>ウルフの勝ち!</div>", unsafe_allow_html=True)
 
     st.markdown(
-        f"<div class='mega-sub'>🐺 ウルフは {'、'.join(wolves)} でした</div>",
+        f"<div class='mega-sub'>🐺 ウルフは {'、'.join(ui.esc(w) for w in wolves)} でした</div>",
         unsafe_allow_html=True,
     )
     majority_word = next(

@@ -33,17 +33,17 @@ result_area = st.empty()
 
 if st.button("🎲 ルーレットスタート!", type="primary", use_container_width=True, disabled=len(names) < 2):
     ui.play_mp3("drum-roll.mp3", sound_area)
-    ui.slot_roll(result_area, names)
+    ui.slot_roll(result_area, [ui.esc(n) for n in names])
     sound_area.empty()
 
     if mode == "🏆 当たり抽選":
         winners = random.sample(names, min(winners_n, len(names)))
-        html = "".join(f"<div class='mega'>{w}</div>" for w in winners)
+        html = "".join(f"<div class='mega'>{ui.esc(w)}</div>" for w in winners)
         st.session_state.roulette_result = html + "<div class='mega-sub'>🎉 当たり!</div>"
     elif mode == "🔢 順番決め":
         order = random.sample(names, len(names))
         rows = "".join(
-            f"<div class='mega-sub'>{i + 1}. {n}</div>" for i, n in enumerate(order)
+            f"<div class='mega-sub'>{i + 1}. {ui.esc(n)}</div>" for i, n in enumerate(order)
         )
         st.session_state.roulette_result = rows
     else:
@@ -52,16 +52,22 @@ if st.button("🎲 ルーレットスタート!", type="primary", use_container_
         for t in range(teams_n):
             members = shuffled[t::teams_n]
             rows.append(
-                f"<div class='mega-sub'>チーム{chr(ord('A') + t)}:{'、'.join(members)}</div>"
+                f"<div class='mega-sub'>チーム{chr(ord('A') + t)}:{'、'.join(ui.esc(m) for m in members)}</div>"
             )
         st.session_state.roulette_result = "".join(rows)
 
+    # 結果がどの入力・モードのものかを記録し、入力変更時に古い結果を出さないようにする
+    st.session_state.roulette_sig = (tuple(names), mode)
     ui.play_mp3("tada.mp3", sound_area)
     ui.confetti(70)
 
 if len(names) < 2:
     st.info("2人以上の名前を入れるとスタートできます。")
 
-if st.session_state.get("roulette_result"):
+# 名前やモードを変えたら、前回の結果は表示しない(古い当選者を出し続けないため)
+if (
+    st.session_state.get("roulette_result")
+    and st.session_state.get("roulette_sig") == (tuple(names), mode)
+):
     with result_area:
         st.markdown(st.session_state.roulette_result, unsafe_allow_html=True)
