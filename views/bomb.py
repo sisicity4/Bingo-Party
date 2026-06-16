@@ -31,11 +31,11 @@ if "bomb_duration" in st.session_state:
     components.html(
         f"""
 <div id="stage" data-round="{st.session_state.bomb_round}" style="font-family: sans-serif; text-align: center; color: #fff; padding-top: 8px;">
-  <button id="ignite" style="font-size: 28px; padding: 14px 50px; border-radius: 12px;
+  <button id="ignite" style="font-size: clamp(20px, 6vw, 28px); padding: 14px clamp(28px, 11vw, 50px); border-radius: 12px;
        border: 2px solid #ff5555; background: #16161f; color: #ff5555;
-       cursor: pointer; font-weight: 900;">🔥 点火!</button>
-  <div id="bomb" style="display: none; font-size: 130px; line-height: 1.2;">💣</div>
-  <div id="msg" style="font-size: 28px; font-weight: 700; margin-top: 4px;"></div>
+       cursor: pointer; font-weight: 900; max-width: 92%;">🔥 点火!</button>
+  <div id="bomb" style="display: none; font-size: clamp(90px, 32vw, 130px); line-height: 1.2;">💣</div>
+  <div id="msg" style="font-size: clamp(20px, 6vw, 28px); font-weight: 700; margin-top: 4px; padding: 0 8px;"></div>
 </div>
 <audio id="boom" src="data:audio/wav;base64,{sounds.explosion_b64()}"></audio>
 <style>
@@ -89,7 +89,7 @@ if "bomb_duration" in st.session_state:
       clearTimeout(tickTimer);
       bomb.classList.remove("ticking");
       bomb.textContent = "💥";
-      bomb.style.fontSize = "170px";
+      bomb.style.fontSize = "clamp(120px, 42vw, 170px)";
       msg.textContent = "ドカーン!!持ってた人の負け!";
       msg.style.color = "#ff5555";
       boom.currentTime = 0;

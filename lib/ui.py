@@ -301,15 +301,17 @@ def countdown(seconds, key, end_sound_b64):
     """iframe内で完結するカウントダウンタイマー(開始/リセットボタン付き)。
 
     iframe内のクリックを起点にするのでブラウザの自動再生制限に引っかからない。
+    iframeは隔離されページ側の@mediaが届かないため、文字・ボタンはここでvw基準の
+    clamp()を使い、スマホ幅でも溢れないようにしている。
     """
     components.html(
         f"""
 <div style="font-family: sans-serif; text-align: center; color: #fff;">
-  <div id="t{key}" style="font-size: 110px; font-weight: 900; color: #FFD700;
+  <div id="t{key}" style="font-size: clamp(56px, 22vw, 110px); font-weight: 900; color: #FFD700;
        font-variant-numeric: tabular-nums; line-height: 1.1;"></div>
-  <button id="b{key}" style="font-size: 24px; padding: 10px 40px; margin-top: 8px;
+  <button id="b{key}" style="font-size: clamp(18px, 5vw, 24px); padding: 10px clamp(20px, 8vw, 40px); margin-top: 8px;
        border-radius: 10px; border: 2px solid #FFD700; background: #16161f;
-       color: #FFD700; cursor: pointer; font-weight: 700;">▶ スタート</button>
+       color: #FFD700; cursor: pointer; font-weight: 700; max-width: 90%;">▶ スタート</button>
 </div>
 <audio id="a{key}" src="data:audio/wav;base64,{end_sound_b64}"></audio>
 <script>
