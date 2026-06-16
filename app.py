@@ -6,7 +6,8 @@ st.set_page_config(
     page_title="Party Games",
     page_icon="🎉",
     layout="wide",
-    initial_sidebar_state="expanded",
+    # auto: PCでは開き、スマホ等の狭い画面では自動で閉じる(ゲーム画面を覆わない)
+    initial_sidebar_state="auto",
 )
 
 ui.inject_css()

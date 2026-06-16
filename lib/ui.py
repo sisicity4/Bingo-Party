@@ -206,10 +206,16 @@ h1 {
   .flash-mark { font-size: clamp(96px, 30vw, 170px); }
   .placeholder-dash { font-size: 56px; }
   .word-card { padding: 24px 10px; font-size: clamp(28px, 9vw, 60px); }
-  /* ビンゴ盤: 行頭とすき間を詰めてセルを少しでも大きく */
-  .bgrid { grid-template-columns: 24px repeat(15, 1fr); gap: 2px; }
-  .bgrid .rowhead { font-size: 13px; }
-  .bgrid .cell { border-radius: 5px; }
+  /* ビンゴ盤: 15列だとセルが極小になるので、同じDOMのまま列方向に流して
+     B/I/N/G/O を縦5列(各列=行頭+15マス)に転置し、セルを大きく保つ */
+  .bgrid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(16, auto);
+    grid-auto-flow: column;
+    gap: 3px;
+  }
+  .bgrid .rowhead { font-size: 16px; }
+  .bgrid .cell { font-size: clamp(13px, 3.6vw, 22px); border-radius: 6px; }
   /* ボタンはさらに高め+読みやすい文字に */
   .stButton > button { min-height: 54px; font-size: 1.05rem; }
 }
