@@ -59,14 +59,18 @@ h1 {
 @keyframes shine {
   to { background-position: 200% center; }
 }
-/* ボタンを大きくゴージャスに */
+/* ボタンを大きくゴージャスに(指タップでも押しやすい高さを確保) */
 .stButton > button {
   border-radius: 14px;
   font-weight: 800;
+  min-height: 48px;
   transition: transform 0.1s ease, box-shadow 0.2s ease;
 }
 .stButton > button:hover {
   transform: scale(1.03);
+}
+.stButton > button:active {
+  transform: scale(0.97);
 }
 .stButton > button[data-testid="stBaseButton-primary"],
 .stButton > button[kind="primary"] {
@@ -188,6 +192,26 @@ h1 {
   font-size: clamp(18px, 2.5vw, 32px);
   font-weight: 700;
   color: #fff;
+}
+/* 長い名前・お題でも横スクロールせず折り返す */
+.mega, .mega-sub, .slot, .word-card, .team-name {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+/* スマホ(狭い画面)向け調整: 文字を画面内に収め、タップ領域を広げる */
+@media (max-width: 640px) {
+  .mega { font-size: clamp(46px, 16vw, 120px); }
+  .mega-sub { font-size: clamp(22px, 6vw, 40px); }
+  .slot { font-size: clamp(46px, 16vw, 120px); }
+  .flash-mark { font-size: clamp(96px, 30vw, 170px); }
+  .placeholder-dash { font-size: 56px; }
+  .word-card { padding: 24px 10px; font-size: clamp(28px, 9vw, 60px); }
+  /* ビンゴ盤: 行頭とすき間を詰めてセルを少しでも大きく */
+  .bgrid { grid-template-columns: 24px repeat(15, 1fr); gap: 2px; }
+  .bgrid .rowhead { font-size: 13px; }
+  .bgrid .cell { border-radius: 5px; }
+  /* ボタンはさらに高め+読みやすい文字に */
+  .stButton > button { min-height: 54px; font-size: 1.05rem; }
 }
 </style>
 """
