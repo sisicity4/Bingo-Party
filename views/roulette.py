@@ -21,12 +21,16 @@ mode = st.radio(
     horizontal=True,
 )
 
+# スライダー値も署名に含め、人数/チーム数を変えたら古い結果を消す
+mode_param = None
 if mode == "🏆 当たり抽選":
     max_win = max(1, len(names))
     winners_n = st.slider("当たりの人数", 1, max_win, 1) if max_win > 1 else 1
+    mode_param = winners_n
 elif mode == "👥 チーム分け":
     max_teams = max(2, len(names))
     teams_n = st.slider("チーム数", 2, min(6, max_teams), 2)
+    mode_param = teams_n
 
 sound_area = st.empty()
 result_area = st.empty()
@@ -56,18 +60,18 @@ if st.button("🎲 ルーレットスタート!", type="primary", use_container_
             )
         st.session_state.roulette_result = "".join(rows)
 
-    # 結果がどの入力・モードのものかを記録し、入力変更時に古い結果を出さないようにする
-    st.session_state.roulette_sig = (tuple(names), mode)
+    # 結果がどの入力・モード・スライダー値のものかを記録し、変更時に古い結果を出さない
+    st.session_state.roulette_sig = (tuple(names), mode, mode_param)
     ui.play_mp3("tada.mp3", sound_area)
     ui.confetti(70)
 
 if len(names) < 2:
     st.info("2人以上の名前を入れるとスタートできます。")
 
-# 名前やモードを変えたら、前回の結果は表示しない(古い当選者を出し続けないため)
+# 名前・モード・スライダー値を変えたら、前回の結果は表示しない(古い結果を出し続けないため)
 if (
     st.session_state.get("roulette_result")
-    and st.session_state.get("roulette_sig") == (tuple(names), mode)
+    and st.session_state.get("roulette_sig") == (tuple(names), mode, mode_param)
 ):
     with result_area:
         st.markdown(st.session_state.roulette_result, unsafe_allow_html=True)
