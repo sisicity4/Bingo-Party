@@ -53,7 +53,7 @@ with number_area:
         st.markdown("<div class='placeholder-dash'>—</div>", unsafe_allow_html=True)
     else:
         st.markdown(
-            f"<div class='mega'><span style='font-size:0.45em;color:#fff;'>{letter_of(cur)}</span> {cur}</div>",
+            f"<div class='mega'><span style='font-size:0.45em;color:#2db6ff;'>{letter_of(cur)}</span> {cur}</div>",
             unsafe_allow_html=True,
         )
 

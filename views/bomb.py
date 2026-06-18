@@ -30,12 +30,12 @@ if "bomb_duration" in st.session_state:
     # data-round を埋め込み、時間とお題が前回と同じでもHTMLを変えて iframe を確実に再マウントする
     components.html(
         f"""
-<div id="stage" data-round="{st.session_state.bomb_round}" style="font-family: sans-serif; text-align: center; color: #fff; padding-top: 8px;">
-  <button id="ignite" style="font-size: clamp(20px, 6vw, 28px); padding: 14px clamp(28px, 11vw, 50px); border-radius: 12px;
-       border: 2px solid #ff5555; background: #16161f; color: #ff5555;
+<div id="stage" data-round="{st.session_state.bomb_round}" style="font-family: 'M PLUS Rounded 1c','Hiragino Maru Gothic ProN',sans-serif; text-align: center; color: #33304a; padding-top: 8px;">
+  <button id="ignite" style="font-size: clamp(20px, 6vw, 28px); padding: 14px clamp(28px, 11vw, 50px); border-radius: 999px;
+       border: none; background: linear-gradient(180deg,#ff7a5c,#ff3d2e); box-shadow: 0 5px 0 #c41d10; color: #fff;
        cursor: pointer; font-weight: 900; max-width: 92%;">🔥 点火!</button>
   <div id="bomb" style="display: none; font-size: clamp(90px, 32vw, 130px); line-height: 1.2;">💣</div>
-  <div id="msg" style="font-size: clamp(20px, 6vw, 28px); font-weight: 700; margin-top: 4px; padding: 0 8px;"></div>
+  <div id="msg" style="font-size: clamp(20px, 6vw, 28px); font-weight: 800; margin-top: 4px; padding: 0 8px; color: #33304a;"></div>
 </div>
 <audio id="boom" src="data:audio/wav;base64,{sounds.explosion_b64()}"></audio>
 <style>
