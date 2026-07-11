@@ -208,9 +208,9 @@ hr { border-color: rgba(0,0,0,.08); }
   border: 2px solid #ececf4;
 }
 .bgrid .cell.drawn {
-  background: #fff2bf;
-  color: var(--yellow-d);
-  border-color: var(--yellow);
+  background: #ffe27a;
+  color: #5a3d00;
+  border-color: var(--yellow-d);
 }
 .bgrid .cell.current {
   background: var(--pink);
@@ -361,8 +361,7 @@ def countdown(seconds, key, end_sound_b64):
     components.html(
         f"""
 <div style="font-family: 'M PLUS Rounded 1c','Hiragino Maru Gothic ProN',sans-serif; text-align: center; color: #33304a;">
-  <div id="t{key}" style="font-size: clamp(56px, 22vw, 110px); font-weight: 900; color: #2db6ff;
-       -webkit-text-stroke: 3px #fff; paint-order: stroke fill;
+  <div id="t{key}" style="font-size: clamp(56px, 22vw, 110px); font-weight: 900; color: #0072c6;
        font-variant-numeric: tabular-nums; line-height: 1.1;"></div>
   <button id="b{key}" style="font-size: clamp(18px, 5vw, 24px); padding: 12px clamp(20px, 8vw, 40px); margin-top: 8px;
        border-radius: 999px; border: none; background: linear-gradient(180deg,#ff6b96,#ff2d6b);
@@ -381,7 +380,7 @@ def countdown(seconds, key, end_sound_b64):
   }}
   function render() {{
     disp.textContent = fmt(left);
-    disp.style.color = left <= 10 ? "#ff2d6b" : "#2db6ff";
+    disp.style.color = left <= 10 ? "#d10049" : "#0072c6";
   }}
   render();
   btn.addEventListener("click", () => {{
