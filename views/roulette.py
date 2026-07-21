@@ -28,8 +28,8 @@ if mode == "🏆 当たり抽選":
     winners_n = st.slider("当たりの人数", 1, max_win, 1) if max_win > 1 else 1
     mode_param = winners_n
 elif mode == "👥 チーム分け":
-    max_teams = max(2, len(names))
-    teams_n = st.slider("チーム数", 2, min(6, max_teams), 2)
+    max_teams = min(6, len(names))
+    teams_n = st.slider("チーム数", 2, max_teams, 2) if max_teams > 2 else 2
     mode_param = teams_n
 
 sound_area = st.empty()
